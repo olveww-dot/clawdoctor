@@ -73,7 +73,11 @@ http://127.0.0.1:8080/dashboard.html
 
 ---
 
-## 📸 使用 | Usage
+## 📸 截图 | Screenshots
+
+<p align="center">
+  <img src="screenshot.png" alt="ClawDoctor Dashboard" width="90%">
+</p>
 
 启动服务后访问：`http://127.0.0.1:8080/dashboard.html`
 
