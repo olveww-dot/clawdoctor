@@ -31,18 +31,24 @@
 
 ## 🚀 快速开始 | Quick Start
 
-### 安装 | Installation
+### 方式一：ClawHub 安装（推荐）| Install via ClawHub (Recommended)
+
+```bash
+npx clawhub install clawdoctor
+```
+
+### 方式二：手动安装 | Manual Installation
 
 ```bash
 # 克隆仓库 | Clone repository
 git clone https://github.com/olveww-dot/clawdoctor.git
 cd clawdoctor
 
-# 安装依赖 | Install dependencies
-pip3 install psutil
+# 运行安装脚本 | Run install script
+./install.sh
 
-# 启动服务 | Start server
-python3 server_simple.py
+# 或手动安装 | Or install manually
+pip3 install psutil
 ```
 
 ### 使用 | Usage
