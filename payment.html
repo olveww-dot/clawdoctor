@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClawDoctor - 订阅</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .plan-card { transition: all 0.3s ease; }
+        .plan-card:hover { transform: translateY(-4px); }
+        .plan-card.popular { border-color: #3b82f6; box-shadow: 0 0 0 2px #3b82f6; }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <header class="bg-gray-800 border-b border-gray-700">
+        <div class="max-w-5xl mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <span class="text-3xl">🦞</span>
+                    <h1 class="text-2xl font-bold">ClawDoctor</h1>
+                </div>
+                <a href="/dashboard.html" class="text-gray-400 hover:text-white">← 返回 Dashboard</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-12">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4">选择你的套餐</h2>
+            <p class="text-gray-400 text-lg">支持支付宝、微信、信用卡</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <!-- Personal -->
+            <div class="plan-card bg-gray-800 rounded-2xl p-8 border border-gray-700">
+                <div class="text-center mb-6">
+                    <h3 class="text-xl font-semibold mb-2">个人版</h3>
+                    <div class="text-4xl font-bold text-blue-400">$1<span class="text-gray-500 text-lg">/月</span></div>
+                    <p class="text-gray-500 text-sm mt-1">约 ¥7/月</p>
+                </div>
+                <ul class="space-y-3 text-gray-400 mb-8 text-sm">
+                    <li class="flex items-center"><span class="text-green-400 mr-2">✓</span>实时监控（30秒间隔）</li>
+                    <li class="flex items-center"><span class="text-green-400 mr-2">✓</span>自动修复 Gateway</li>
+                    <li class="flex items-center"><span class="text-green-400 mr-2">✓</span>QQ/微信实时通知</li>
+                    <li class="flex items-center"><span class="text-green-400 mr-2">✓</span>7天历史数据</li>
+                    <li class="flex items-center"><span class="text-green-400 mr-2">✓</span>1个 OpenClaw 实例</li>
+                </ul>
+                <a href="https://checkout.paddle.com/checkout/product/pri_01kkm07e93d54fat920xe9b5rs" 
+                   target="_blank"
+                   class="w-full block text-center bg-gradient-to-r from-purple-500 to-blue-500 hover:opacity-90 py-3 rounded-xl font-medium transition">
+                    立即订阅
+                </a>
+            </div>
+
+            <!-- Team - Popular -->
+            <div class="plan-card popular bg-gray-800 rounded-2xl p-8 border-2 border-blue-500 relative">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-500 text-xs px-4 py-1 rounded-full font-medium">最受欢迎</div>
+                <div class="text-center mb-6">
+                    <h3 class="text-xl font-semibold mb-2">小团队版</h3>
+                    <div class="text-4xl font-bold text-blue-400">$4<span class="text-gray-500 text-lg">/月</span></div>
+                    <p class="text-gray-500 text-sm mt-1">约 ¥28/月</p>
+                </div>
+                <ul class="space-y-3 text-gray-400 mb-8 text-sm">
+                    <li class="flex items-center"><span class="text-green-400 mr-2">✓</span><strong class="text-white">所有个人版功能</strong></li>
+                    <li class="flex items-center"><span class="text-green-400 mr-2">✓</span>多实例监控（最多5个）</li>
+                    <li class="flex items-center"><span class="text-green-400 mr-2">✓</span>30天历史数据</li>
+                    <li class="flex items-center"><span class="text-green-400 mr-2">✓</span>API 访问</li>
+                    <li class="flex items-center"><span class="text-green-400 mr-2">✓</span>优先技术支持</li>
+                </ul>
+                <a href="https://checkout.paddle.com/checkout/product/pri_01kkm09nvwj9ex7nssjf27kbch" 
+                   target="_blank"
+                   class="w-full block text-center bg-blue-600 hover:bg-blue-700 py-3 rounded-xl font-medium transition">
+                    立即订阅
+                </a>
+            </div>
+
+            <!-- Enterprise -->
+            <div class="plan-card bg-gray-800 rounded-2xl p-8 border border-gray-700">
+                <div class="text-center mb-6">
+                    <h3 class="text-xl font-semibold mb-2">企业版</h3>
+                    <div class="text-4xl font-bold">$12<span class="text-gray-500 text-lg">/月</span></div>
+                    <p class="text-gray-500 text-sm mt-1">约 ¥85/月</p>
+                </div>
+                <ul class="space-y-3 text-gray-400 mb-8 text-sm">
+                    <li class="flex items-center"><span class="text-green-400 mr-2">✓</span><strong class="text-white">所有团队版功能</strong></li>
+                    <li class="flex items-center"><span class="text-green-400 mr-2">✓</span>无限实例监控</li>
+                    <li class="flex items-center"><span class="text-green-400 mr-2">✓</span>白标定制</li>
+                    <li class="flex items-center"><span class="text-green-400 mr-2">✓</span>优先支持 + SLA</li>
+                    <li class="flex items-center"><span class="text-green-400 mr-2">✓</span>专属客服</li>
+                </ul>
+                <a href="https://checkout.paddle.com/checkout/product/pri_01kkm0bk13cv93jam6nq3tvj88" 
+                   target="_blank"
+                   class="w-full block text-center bg-gray-700 hover:bg-gray-600 py-3 rounded-xl font-medium transition">
+                    立即订阅
+                </a>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700">
+            <h3 class="text-2xl font-bold mb-6 text-center">常见问题</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                <div>
+                    <h4 class="font-semibold mb-2">支持哪些支付方式？</h4>
+                    <p class="text-gray-400">支持支付宝、微信支付、信用卡、PayPal 等多种支付方式。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-2">可以随时取消吗？</h4>
+                    <p class="text-gray-400">是的，可以随时取消订阅，取消后当月仍可继续使用。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-2">有退款政策吗？</h4>
+                    <p class="text-gray-400">7天内不满意可全额退款，无需理由。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-2">付款后多久生效？</h4>
+                    <p class="text-gray-400">付款后立即生效，您会收到 API Key 用于激活服务。</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 border-t border-gray-700 mt-12">
+        <div class="max-w-5xl mx-auto px-4 py-6 text-center text-gray-500 text-sm">
+            © 2026 ClawDoctor. 让 OpenClaw 更稳定。
+        </div>
+    </footer>
+</body>
+</html>

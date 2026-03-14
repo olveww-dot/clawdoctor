@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClawDoctor - OpenClaw 健康监控</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        .status-ok { background-color: #10b981; }
+        .status-warning { background-color: #f59e0b; animation: pulse 1s infinite; }
+        .status-error { background-color: #ef4444; animation: pulse 0.5s infinite; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .log-row:hover {
+            background-color: rgba(55, 65, 81, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Header -->
+    <header class="bg-gray-800 border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <span class="text-3xl">🦞</span>
+                    <div>
+                        <h1 class="text-2xl font-bold">ClawDoctor</h1>
+                        <p class="text-xs text-gray-400">OpenClaw 健康监控</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-400">最后更新: <span id="lastUpdate">--:--:--</span></span>
+                    <button onclick="refreshData()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm font-medium transition">
+                        🔄 刷新
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Status Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <!-- Gateway Status -->
+            <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-gray-400 text-sm font-medium">Gateway 状态</h3>
+                    <span id="gatewayDot" class="status-dot status-ok"></span>
+                </div>
+                <div class="text-2xl font-bold" id="gatewayStatus">--</div>
+                <div class="text-sm text-gray-500 mt-1">HTTP: <span id="gatewayHttp">--</span></div>
+            </div>
+
+            <!-- QQ Bot Status -->
+            <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-gray-400 text-sm font-medium">QQ Bot</h3>
+                    <span id="qqbotDot" class="status-dot status-ok"></span>
+                </div>
+                <div class="text-2xl font-bold" id="qqbotStatus">--</div>
+                <div class="text-sm text-gray-500 mt-1">错误: <span id="qqbotErrors">--</span></div>
+            </div>
+
+            <!-- System Resources -->
+            <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-gray-400 text-sm font-medium">系统资源</h3>
+                    <span class="status-dot status-ok"></span>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">CPU</span>
+                        <span id="cpuUsage" class="font-mono">--%</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">内存</span>
+                        <span id="memoryUsage" class="font-mono">--%</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">磁盘</span>
+                        <span id="diskUsage" class="font-mono">--%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-gray-400 text-sm font-medium">今日统计</h3>
+                    <span class="status-dot status-ok"></span>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">检查次数</span>
+                        <span id="checkCount" class="font-mono">--</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">错误次数</span>
+                        <span id="errorCount" class="font-mono text-red-400">--</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">可用率</span>
+                        <span id="uptimePercent" class="font-mono text-green-400">--%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Response Time Chart -->
+            <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                <h3 class="text-lg font-semibold mb-4">系统资源趋势 (最近20次)</h3>
+                <canvas id="resourceChart" height="200"></canvas>
+            </div>
+
+            <!-- Error Rate Chart -->
+            <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                <h3 class="text-lg font-semibold mb-4">状态变化</h3>
+                <canvas id="statusChart" height="200"></canvas>
+            </div>
+        </div>
+
+        <!-- Recent Logs -->
+        <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold">最近日志</h3>
+                <span class="text-sm text-gray-500">显示最近 20 条</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="text-left text-gray-400 border-b border-gray-700">
+                            <th class="pb-3">时间</th>
+                            <th class="pb-3">Gateway</th>
+                            <th class="pb-3">QQ Bot</th>
+                            <th class="pb-3">CPU</th>
+                            <th class="pb-3">内存</th>
+                            <th class="pb-3">磁盘</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logTable" class="text-gray-300">
+                        <!-- 动态填充 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 border-t border-gray-700 mt-12">
+        <div class="max-w-7xl mx-auto px-4 py-6 text-center text-gray-500 text-sm">
+            © 2026 ClawDoctor. 让 OpenClaw 更稳定。
+        </div>
+    </footer>
+
+    <script>
+        // 读取本地日志文件
+        async function loadLogs() {
+            try {
+                // 调用本地 API
+                const response = await fetch('/api/logs');
+                if (!response.ok) throw new Error('API error');
+                
+                const result = await response.json();
+                if (result.error) throw new Error(result.error);
+                
+                return result.data || [];
+            } catch (e) {
+                console.log('Using mock data:', e);
+                return generateMockData();
+            }
+        }
+
+        // 生成模拟数据（用于演示）
+        function generateMockData() {
+            const data = [];
+            const now = new Date();
+            for (let i = 20; i >= 0; i--) {
+                const time = new Date(now - i * 60000);
+                data.push({
+                    timestamp: time.toISOString(),
+                    gateway: { status: i === 19 ? 'error' : 'running', http_code: i === 19 ? '000' : '200' },
+                    qqbot: { status: i % 5 === 0 ? 'error' : 'ok', errors: i % 5 === 0 ? ['websocket_timeout'] : [] },
+                    system: { cpu_percent: 10 + Math.random() * 20, memory_percent: 50 + Math.random() * 20, disk_percent: 6 }
+                });
+            }
+            return data;
+        }
+
+        // 更新状态卡片
+        function updateStatusCards(latest) {
+            const gatewayStatus = latest.gateway.status;
+            const qqbotStatus = latest.qqbot.status;
+            
+            // Gateway
+            document.getElementById('gatewayStatus').textContent = gatewayStatus === 'running' ? '运行中' : '异常';
+            document.getElementById('gatewayStatus').className = `text-2xl font-bold ${gatewayStatus === 'running' ? 'text-green-400' : 'text-red-400'}`;
+            document.getElementById('gatewayHttp').textContent = latest.gateway.http_code || '--';
+            document.getElementById('gatewayDot').className = `status-dot ${gatewayStatus === 'running' ? 'status-ok' : 'status-error'}`;
+            
+            // QQ Bot
+            document.getElementById('qqbotStatus').textContent = qqbotStatus === 'ok' ? '正常' : '错误';
+            document.getElementById('qqbotStatus').className = `text-2xl font-bold ${qqbotStatus === 'ok' ? 'text-green-400' : 'text-red-400'}`;
+            document.getElementById('qqbotErrors').textContent = latest.qqbot.errors?.length || 0;
+            document.getElementById('qqbotDot').className = `status-dot ${qqbotStatus === 'ok' ? 'status-ok' : 'status-warning'}`;
+            
+            // System
+            document.getElementById('cpuUsage').textContent = latest.system?.cpu_percent?.toFixed(1) + '%';
+            document.getElementById('memoryUsage').textContent = latest.system?.memory_percent?.toFixed(1) + '%';
+            document.getElementById('diskUsage').textContent = latest.system?.disk_percent?.toFixed(1) + '%';
+        }
+
+        // 更新统计
+        function updateStats(data) {
+            document.getElementById('checkCount').textContent = data.length;
+            const errors = data.filter(d => d.gateway.status !== 'running' || d.qqbot.status !== 'ok').length;
+            document.getElementById('errorCount').textContent = errors;
+            const uptime = ((data.length - errors) / data.length * 100).toFixed(1);
+            document.getElementById('uptimePercent').textContent = uptime + '%';
+        }
+
+        // 更新日志表格
+        function updateLogTable(data) {
+            const tbody = document.getElementById('logTable');
+            tbody.innerHTML = '';
+            
+            data.slice(-20).reverse().forEach(log => {
+                const time = new Date(log.timestamp).toLocaleTimeString();
+                const row = document.createElement('tr');
+                row.className = 'log-row border-b border-gray-700/50 transition-colors';
+                
+                const gatewayClass = log.gateway.status === 'running' ? 'text-green-400' : 'text-red-400';
+                const qqbotClass = log.qqbot.status === 'ok' ? 'text-green-400' : 'text-red-400';
+                
+                row.innerHTML = `
+                    <td class="py-3 font-mono text-xs">${time}</td>
+                    <td class="py-3 ${gatewayClass}">${log.gateway.status === 'running' ? '✓ 运行中' : '✗ 异常'}</td>
+                    <td class="py-3 ${qqbotClass}">${log.qqbot.status === 'ok' ? '✓ 正常' : '✗ ' + (log.qqbot.errors?.[0] || '错误')}</td>
+                    <td class="py-3 font-mono">${log.system?.cpu_percent?.toFixed(1)}%</td>
+                    <td class="py-3 font-mono">${log.system?.memory_percent?.toFixed(1)}%</td>
+                    <td class="py-3 font-mono">${log.system?.disk_percent?.toFixed(1)}%</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // 更新图表
+        let resourceChart, statusChart;
+
+        function updateCharts(data) {
+            const labels = data.map(d => new Date(d.timestamp).toLocaleTimeString());
+            const cpuData = data.map(d => d.system?.cpu_percent || 0);
+            const memoryData = data.map(d => d.system?.memory_percent || 0);
+            
+            // Resource Chart
+            if (resourceChart) resourceChart.destroy();
+            resourceChart = new Chart(document.getElementById('resourceChart'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'CPU %',
+                            data: cpuData,
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: '内存 %',
+                            data: memoryData,
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: true, labels: { color: '#9ca3af' } } },
+                    scales: {
+                        y: { beginAtZero: true, max: 100, grid: { color: '#374151' }, ticks: { color: '#9ca3af' } },
+                        x: { grid: { color: '#374151' }, ticks: { color: '#9ca3af', maxTicksLimit: 8 } }
+                    }
+                }
+            });
+
+            // Status Chart
+            const statusData = data.map(d => d.gateway.status === 'running' && d.qqbot.status === 'ok' ? 1 : 0);
+            if (statusChart) statusChart.destroy();
+            statusChart = new Chart(document.getElementById('statusChart'), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '正常=1, 异常=0',
+                        data: statusData,
+                        backgroundColor: statusData.map(v => v === 1 ? '#10b981' : '#ef4444')
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, max: 1, grid: { color: '#374151' }, ticks: { color: '#9ca3af' } },
+                        x: { grid: { color: '#374151' }, ticks: { color: '#9ca3af', maxTicksLimit: 8 } }
+                    }
+                }
+            });
+        }
+
+        // 刷新数据
+        async function refreshData() {
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+            
+            const data = await loadLogs();
+            if (data.length > 0) {
+                updateStatusCards(data[data.length - 1]);
+                updateStats(data);
+                updateLogTable(data);
+                updateCharts(data);
+            }
+        }
+
+        // 初始化
+        refreshData();
+        
+        // 自动刷新（每 30 秒）
+        setInterval(refreshData, 30000);
+    </script>
+</body>
+</html>
