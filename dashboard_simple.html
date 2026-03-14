@@ -31,31 +31,19 @@
                     <span class="text-3xl">🦞</span>
                     <div>
                         <h1 class="text-2xl font-bold">ClawDoctor</h1>
-                        <p class="text-xs text-gray-400" data-i18n="subtitle">OpenClaw 健康监控与修复</p>
-                        <p class="text-xs text-gray-500 mt-0.5" data-i18n="authorShort">作者：梁溪区佳妮电子商务工作室 EC & 小呆呆</p>
-                        <p class="text-xs text-gray-500">Author: Liangxi Jiani E-commerce Studio EC & Xiaodaidai</p>
-                        <p class="text-xs text-gray-400 mt-0.5">
-                            <span data-i18n="contact">联系邮箱</span>: 
-                            <a href="mailto:olveww@gmail.com" class="text-blue-400 hover:text-blue-300 transition">olveww@gmail.com</a>
-                            <span class="text-gray-500 ml-1">Contact: olveww@gmail.com</span>
-                        </p>
+                        <p class="text-xs text-gray-400">OpenClaw 健康监控与修复</p>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <!-- Language Switcher -->
-                    <div class="flex items-center bg-gray-700 rounded-lg p-1">
-                        <button onclick="setLanguage('zh')" id="btn-zh" class="px-3 py-1 rounded text-sm font-medium bg-blue-600 text-white transition">中文</button>
-                        <button onclick="setLanguage('en')" id="btn-en" class="px-3 py-1 rounded text-sm font-medium text-gray-400 hover:text-white transition">EN</button>
-                    </div>
                     <div class="flex items-center space-x-2">
                         <span class="relative flex h-3 w-3">
                             <span id="liveIndicator" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                             <span id="liveIndicatorDot" class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                         </span>
-                        <span class="text-sm text-gray-400" data-i18n="realtime">实时监控</span>
+                        <span class="text-sm text-gray-400">实时监控</span>
                     </div>
-                    <span class="text-sm text-gray-400"><span data-i18n="lastUpdate">最后更新</span>: <span id="lastUpdate">--:--:--</span></span>
-                    <button onclick="refreshData()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm font-medium transition">🔄 <span data-i18n="refresh">刷新</span></button>
+                    <span class="text-sm text-gray-400">最后更新: <span id="lastUpdate">--:--:--</span></span>
+                    <button onclick="refreshData()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm font-medium transition">🔄 刷新</button>
                 </div>
             </div>
         </div>
@@ -66,13 +54,13 @@
         <!-- Action Buttons -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             <button onclick="runFullCheck()" class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-6 py-4 rounded-xl font-medium transition flex items-center justify-center space-x-2">
-                <span>🔍</span><span data-i18n="btnFullCheck">完整检查</span>
+                <span>🔍</span><span>完整检查</span>
             </button>
             <button onclick="runOneClickFix()" class="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 px-6 py-4 rounded-xl font-medium transition flex items-center justify-center space-x-2">
-                <span>🔧</span><span data-i18n="btnOneClickFix">一键修复</span>
+                <span>🔧</span><span>一键修复</span>
             </button>
             <button onclick="runSecurityScan()" class="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 px-6 py-4 rounded-xl font-medium transition flex items-center justify-center space-x-2">
-                <span>🛡️</span><span data-i18n="btnSecurityScan">安全扫描</span>
+                <span>🛡️</span><span>安全扫描</span>
             </button>
         </div>
 
@@ -81,7 +69,7 @@
             <!-- Gateway Status -->
             <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-gray-400 text-sm font-medium" data-i18n="gatewayStatus">Gateway 状态</h3>
+                    <h3 class="text-gray-400 text-sm font-medium">Gateway 状态</h3>
                     <span id="gatewayDot" class="status-dot status-ok"></span>
                 </div>
                 <div class="text-2xl font-bold" id="gatewayStatus">--</div>
@@ -91,17 +79,17 @@
             <!-- Skills Status -->
             <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-gray-400 text-sm font-medium" data-i18n="skills">技能</h3>
+                    <h3 class="text-gray-400 text-sm font-medium">技能</h3>
                     <span class="status-dot status-ok"></span>
                 </div>
                 <div class="text-2xl font-bold" id="skillsCount">--</div>
-                <div class="text-sm text-gray-500 mt-1" data-i18n="loaded">已加载</div>
+                <div class="text-sm text-gray-500 mt-1">已加载</div>
             </div>
 
             <!-- System Resources -->
             <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-gray-400 text-sm font-medium" data-i18n="systemResources">系统资源</h3>
+                    <h3 class="text-gray-400 text-sm font-medium">系统资源</h3>
                     <span class="status-dot status-ok"></span>
                 </div>
                 <div class="space-y-2">
@@ -110,11 +98,11 @@
                         <span id="cpuUsage" class="font-mono">--%</span>
                     </div>
                     <div class="flex justify-between text-sm">
-                        <span class="text-gray-500" data-i18n="memory">内存</span>
+                        <span class="text-gray-500">内存</span>
                         <span id="memoryUsage" class="font-mono">--%</span>
                     </div>
                     <div class="flex justify-between text-sm">
-                        <span class="text-gray-500" data-i18n="disk">磁盘</span>
+                        <span class="text-gray-500">磁盘</span>
                         <span id="diskUsage" class="font-mono">--%</span>
                     </div>
                 </div>
@@ -132,16 +120,19 @@
 
         <!-- Fix Categories -->
         <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 mb-8">
-            <h3 class="text-lg font-semibold mb-4" data-i18n="fixFunctions">修复功能</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <button onclick="runFix('gateway')" class="fix-card bg-gradient-to-r from-gray-700 to-gray-600 hover:from-gray-600 hover:to-gray-500 px-6 py-4 rounded-xl font-medium transition flex items-center justify-center space-x-2">
-                    <span>🚀</span><span data-i18n="fixGateway">Gateway</span>
+            <h3 class="text-lg font-semibold mb-4">修复功能</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button onclick="runFix('gateway')" class="fix-card bg-gray-700 hover:bg-gray-600 p-4 rounded-lg text-center">
+                    <div class="text-2xl mb-2">🚀</div>
+                    <div class="text-xs">Gateway</div>
                 </button>
-                <button onclick="runFix('config')" class="fix-card bg-gradient-to-r from-gray-700 to-gray-600 hover:from-gray-600 hover:to-gray-500 px-6 py-4 rounded-xl font-medium transition flex items-center justify-center space-x-2">
-                    <span>⚙️</span><span data-i18n="fixConfig">配置</span>
+                <button onclick="runFix('config')" class="fix-card bg-gray-700 hover:bg-gray-600 p-4 rounded-lg text-center">
+                    <div class="text-2xl mb-2">⚙️</div>
+                    <div class="text-xs">配置</div>
                 </button>
-                <button onclick="runFix('logs')" class="fix-card bg-gradient-to-r from-gray-700 to-gray-600 hover:from-gray-600 hover:to-gray-500 px-6 py-4 rounded-xl font-medium transition flex items-center justify-center space-x-2">
-                    <span>📄</span><span data-i18n="fixLogs">日志</span>
+                <button onclick="runFix('logs')" class="fix-card bg-gray-700 hover:bg-gray-600 p-4 rounded-lg text-center">
+                    <div class="text-2xl mb-2">📄</div>
+                    <div class="text-xs">日志</div>
                 </button>
             </div>
         </div>
@@ -149,11 +140,11 @@
         <!-- Charts -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                <h3 class="text-lg font-semibold mb-4" data-i18n="resourceTrend">系统资源趋势</h3>
+                <h3 class="text-lg font-semibold mb-4">系统资源趋势</h3>
                 <canvas id="resourceChart" height="200"></canvas>
             </div>
             <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                <h3 class="text-lg font-semibold mb-4" data-i18n="statusChange">状态变化</h3>
+                <h3 class="text-lg font-semibold mb-4">状态变化</h3>
                 <canvas id="statusChart" height="200"></canvas>
             </div>
         </div>
@@ -161,19 +152,19 @@
         <!-- Recent Logs -->
         <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold" data-i18n="recentLogs">最近日志</h3>
-                <span class="text-sm text-gray-500" data-i18n="showLast20">显示最近 20 条</span>
+                <h3 class="text-lg font-semibold">最近日志</h3>
+                <span class="text-sm text-gray-500">显示最近 20 条</span>
             </div>
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                     <thead>
                         <tr class="text-left text-gray-400 border-b border-gray-700">
-                            <th class="pb-3" data-i18n="time">时间</th>
+                            <th class="pb-3">时间</th>
                             <th class="pb-3">Gateway</th>
-                            <th class="pb-3" data-i18n="skills">技能</th>
+                            <th class="pb-3">技能</th>
                             <th class="pb-3">CPU</th>
-                            <th class="pb-3" data-i18n="memory">内存</th>
-                            <th class="pb-3" data-i18n="disk">磁盘</th>
+                            <th class="pb-3">内存</th>
+                            <th class="pb-3">磁盘</th>
                         </tr>
                     </thead>
                     <tbody id="logTable" class="text-gray-300"></tbody>
@@ -183,15 +174,8 @@
     </main>
 
     <footer class="bg-gray-800 border-t border-gray-700 mt-12">
-        <div class="max-w-7xl mx-auto px-4 py-6 text-center">
-            <div class="text-gray-400 text-sm mb-2">© 2026 ClawDoctor</div>
-            <div class="text-gray-500 text-xs mb-1" data-i18n="author">作者：梁溪区佳妮电子商务工作室 EC & 小呆呆</div>
-            <div class="text-gray-500 text-xs mb-2">Author: Liangxi Jiani E-commerce Studio EC & Xiaodaidai</div>
-            <div class="text-gray-400 text-sm">
-                <span data-i18n="contact">联系邮箱</span>: 
-                <a href="mailto:olveww@gmail.com" class="text-blue-400 hover:text-blue-300 transition">olveww@gmail.com</a>
-            </div>
-            <div class="text-gray-500 text-xs mt-1">Contact: olveww@gmail.com</div>
+        <div class="max-w-7xl mx-auto px-4 py-6 text-center text-gray-500 text-sm">
+            © 2026 ClawDoctor. 让 OpenClaw 更稳定。
         </div>
     </footer>
 
@@ -437,87 +421,6 @@
                 }
             }, 5000);
             setInterval(refreshData, 30000);
-        }
-
-        // 多语言支持
-        const i18n = {
-            zh: {
-                subtitle: 'OpenClaw 健康监控与修复',
-                realtime: '实时监控',
-                lastUpdate: '最后更新',
-                refresh: '刷新',
-                btnFullCheck: '完整检查',
-                btnOneClickFix: '一键修复',
-                btnSecurityScan: '安全扫描',
-                gatewayStatus: 'Gateway 状态',
-                skills: '技能',
-                loaded: '已加载',
-                systemResources: '系统资源',
-                memory: '内存',
-                disk: '磁盘',
-                fixFunctions: '修复功能',
-                fixGateway: 'Gateway',
-                fixConfig: '配置',
-                fixLogs: '日志',
-                resourceTrend: '系统资源趋势',
-                statusChange: '状态变化',
-                recentLogs: '最近日志',
-                showLast20: '显示最近 20 条',
-                time: '时间',
-                contact: '联系邮箱',
-                by: '作者',
-                authorShort: '作者：梁溪区佳妮电子商务工作室 EC & 小呆呆',
-                author: '作者：梁溪区佳妮电子商务工作室 EC & 小呆呆'
-            },
-            en: {
-                subtitle: 'OpenClaw Health Monitor & Fixer',
-                realtime: 'Real-time Monitor',
-                lastUpdate: 'Last Update',
-                refresh: 'Refresh',
-                btnFullCheck: 'Full Check',
-                btnOneClickFix: 'One-Click Fix',
-                btnSecurityScan: 'Security Scan',
-                gatewayStatus: 'Gateway Status',
-                skills: 'Skills',
-                loaded: 'Loaded',
-                systemResources: 'System Resources',
-                memory: 'Memory',
-                disk: 'Disk',
-                fixFunctions: 'Fix Functions',
-                fixGateway: 'Gateway',
-                fixConfig: 'Config',
-                fixLogs: 'Logs',
-                resourceTrend: 'Resource Trend',
-                statusChange: 'Status Change',
-                recentLogs: 'Recent Logs',
-                showLast20: 'Show Last 20',
-                time: 'Time',
-                contact: 'Contact',
-                by: 'by',
-                author: 'Author: Liangxi Jiani E-commerce Studio EC & Xiaodaidai'
-            }
-        };
-
-        let currentLang = 'zh';
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            
-            // 更新按钮样式
-            document.getElementById('btn-zh').className = lang === 'zh' 
-                ? 'px-3 py-1 rounded text-sm font-medium bg-blue-600 text-white transition'
-                : 'px-3 py-1 rounded text-sm font-medium text-gray-400 hover:text-white transition';
-            document.getElementById('btn-en').className = lang === 'en'
-                ? 'px-3 py-1 rounded text-sm font-medium bg-blue-600 text-white transition'
-                : 'px-3 py-1 rounded text-sm font-medium text-gray-400 hover:text-white transition';
-            
-            // 更新所有文本
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (i18n[lang][key]) {
-                    el.textContent = i18n[lang][key];
-                }
-            });
         }
 
         startRealtimeMonitor();
