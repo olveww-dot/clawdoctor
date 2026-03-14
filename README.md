@@ -1,7 +1,7 @@
 # 🦞 ClawDoctor
 
 <p align="center">
-  <img src="https://img.shields.io/badge/OpenClaw-Health%20Monitor-blue?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6Ii8+PHBhdGggZD0iTTEyIDZ2MTJtLTYtNmgxMiIvPjwvc3ZnPg==&logoColor=white" alt="OpenClaw">
+  <img src="https://img.shields.io/badge/OpenClaw-Health%20Monitor-blue?style=for-the-badge" alt="OpenClaw">
   <img src="https://img.shields.io/badge/Python-3.10%2B-green?style=for-the-badge&logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License">
 </p>
@@ -14,6 +14,19 @@
 <p align="center">
   🔍 实时监控 · 🔧 一键修复 · 🛡️ 安全扫描 · 📊 数据可视化 · 🌐 中英文支持
 </p>
+
+---
+
+## 📸 截图 | Screenshots
+
+> 启动服务后访问：`http://127.0.0.1:8080/dashboard.html`
+
+**功能预览：**
+- 🔍 完整检查 - 一键检测所有组件状态
+- 🔧 一键修复 - 自动修复常见问题
+- 🛡️ 安全扫描 - 检测潜在安全风险
+- 📊 实时监控 - CPU/内存/磁盘可视化
+- 🌐 中英文切换 - 支持双语界面
 
 ---
 
@@ -62,37 +75,16 @@ python3 clawdoctor_simple.py --fix
 
 # 安全扫描 | Security scan
 python3 clawdoctor_simple.py --scan
+
+# 启动 Web 服务 | Start web server
+python3 server_simple.py
 ```
-
-### Web 界面 | Web Dashboard
-
-启动服务后访问 | Visit after starting server:
-```
-http://127.0.0.1:8080/dashboard.html
-```
-
----
-
-## 📸 截图 | Screenshots
-
-<p align="center">
-  <img src="screenshot.png" alt="ClawDoctor Dashboard" width="90%">
-</p>
-
-启动服务后访问：`http://127.0.0.1:8080/dashboard.html`
-
-**功能预览：**
-- 🔍 完整检查 - 一键检测所有组件状态
-- 🔧 一键修复 - 自动修复常见问题
-- 🛡️ 安全扫描 - 检测潜在安全风险
-- 📊 实时监控 - CPU/内存/磁盘可视化
-- 🌐 中英文切换 - 支持双语界面
 
 ---
 
 ## 🛠️ 技术栈 | Tech Stack
 
-- **Backend**: Python 3.10+, Flask-like HTTP server
+- **Backend**: Python 3.10+, HTTP Server
 - **Frontend**: HTML5, Tailwind CSS, Chart.js
 - **Monitoring**: psutil for system metrics
 - **i18n**: JavaScript i18n for Chinese/English
@@ -106,6 +98,9 @@ clawdoctor/
 ├── clawdoctor_simple.py    # 核心监控与修复模块
 ├── server_simple.py        # Web API 服务器
 ├── dashboard.html          # Web 监控界面
+├── SKILL.md               # ClawHub 技能描述
+├── package.json           # 技能配置
+├── install.sh             # 安装脚本
 └── README.md              # 项目说明
 ```
 
