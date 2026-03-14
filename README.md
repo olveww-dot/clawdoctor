@@ -75,6 +75,10 @@ http://127.0.0.1:8080/dashboard.html
 
 ## 📸 截图 | Screenshots
 
+<p align="center">
+  <img src="https://github.com/olveww-dot/clawdoctor/blob/main/screenshot.png?raw=true" alt="ClawDoctor Dashboard" width="90%">
+</p>
+
 启动服务后访问：`http://127.0.0.1:8080/dashboard.html`
 
 **功能预览：**
