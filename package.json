@@ -1,0 +1,38 @@
+{
+  "name": "clawdoctor",
+  "version": "1.0.0",
+  "description": "OpenClaw Health Monitor & Fixer",
+  "keywords": [
+    "openclaw",
+    "monitor",
+    "health",
+    "repair",
+    "dashboard"
+  ],
+  "author": "梁溪区佳妮电子商务工作室 EC & 小呆呆",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/olveww-dot/clawdoctor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/olveww-dot/clawdoctor/issues"
+  },
+  "homepage": "https://github.com/olveww-dot/clawdoctor#readme",
+  "engines": {
+    "python": ">=3.10"
+  },
+  "dependencies": {
+    "psutil": "^5.9.0"
+  },
+  "bin": {
+    "clawdoctor": "clawdoctor_simple.py",
+    "clawdoctor-server": "server_simple.py"
+  },
+  "scripts": {
+    "start": "python3 server_simple.py",
+    "status": "python3 clawdoctor_simple.py --status",
+    "fix": "python3 clawdoctor_simple.py --fix",
+    "scan": "python3 clawdoctor_simple.py --scan"
+  }
+}
