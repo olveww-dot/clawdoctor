@@ -73,9 +73,6 @@ http://127.0.0.1:8080/dashboard.html
 
 ---
 
-## 📸 截图 | Screenshots
-
-启动服务后访问：`http://127.0.0.1:8080/dashboard.html`
 
 **功能预览：**
 - 🔍 完整检查 - 一键检测所有组件状态
