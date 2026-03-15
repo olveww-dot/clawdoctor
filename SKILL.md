@@ -17,7 +17,7 @@ ClawDoctor is a health monitoring and repair tool for OpenClaw. It provides real
 ## Installation
 
 ```bash
-npx clawhub install clawdoctor
+npx clawhub install clawdoctor-openclaw
 ```
 
 Or manually:
